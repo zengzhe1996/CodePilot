@@ -108,7 +108,7 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
                   ? "border-status-warning-border text-status-warning-foreground"
                   : skill.source === "plugin"
                     ? "border-primary/40 text-primary"
-                    : "border-primary/40 text-primary"
+                    : "border-primary/40 text-primary",
             )}
           >
             {skill.source === "global" ? (
@@ -126,7 +126,7 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
 
         <div className="flex items-center gap-1">
           {/* View mode toggles */}
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant={viewMode === "edit" ? "secondary" : "ghost"}
@@ -161,12 +161,12 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
               </Button>
             </TooltipTrigger>
             <TooltipContent>{t('skills.splitView')}</TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
 
-          <div className="w-px h-4 bg-border mx-1" />
+          {/* <div className="w-px h-4 bg-border mx-1" /> */}
 
           {/* Save */}
-          <Button
+          {/* <Button
             size="xs"
             onClick={handleSave}
             disabled={!isDirty || saving}
@@ -177,17 +177,17 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
             ) : (
               <FloppyDisk size={12} />
             )}
-            {saving ? "Saving" : saved ? t('skills.saved') : t('skills.save')}
-          </Button>
+            {saving ? "Saving" : saved ? t("skills.saved") : t("skills.save")}
+          </Button> */}
 
           {/* Delete */}
-          <Button
+          {/* <Button
             variant={confirmDelete ? "destructive" : "ghost"}
             size="icon-xs"
             onClick={handleDelete}
           >
             <Trash size={12} />
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -199,7 +199,7 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
             onChange={setContent}
             onSave={handleEditorSave}
             filename={skill.filePath}
-            placeholder={t('skills.placeholder')}
+            placeholder={t("skills.placeholder")}
           />
         )}
         {viewMode === "preview" && (
@@ -213,7 +213,7 @@ export function SkillEditor({ skill, onSave, onDelete }: SkillEditorProps) {
                 onChange={setContent}
                 onSave={handleEditorSave}
                 filename={skill.filePath}
-                placeholder={t('skills.placeholder')}
+                placeholder={t("skills.placeholder")}
               />
             </div>
             <div className="flex-1 min-w-0 overflow-auto">

@@ -71,7 +71,7 @@
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.546 0.245 262.881);
+  --primary: #6632FF;
   --primary-foreground: oklch(0.985 0.001 106.423);
   --secondary: oklch(0.97 0.001 106.424);
   --secondary-foreground: oklch(0.216 0.006 56.043);
@@ -82,22 +82,22 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.546 0.245 262.881);
-  --chart-1: oklch(0.546 0.245 262.881);
+  --ring: #6632FF;
+  --chart-1: #6632FF;
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0.001 106.423);
   --sidebar-foreground: oklch(0.147 0.004 49.25);
-  --sidebar-primary: oklch(0.546 0.245 262.881);
+  --sidebar-primary: #6632FF;
   --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
   --sidebar-accent: oklch(0.97 0.001 106.424);
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
-  --sidebar-ring: oklch(0.546 0.245 262.881);
-  --user-bubble: oklch(0.22 0.005 250);
-  --user-bubble-foreground: oklch(0.985 0.001 106.423);
+  --sidebar-ring: #6632FF;
+  --user-bubble: #E0DFFF;
+  --user-bubble-foreground: #2A2D32;
   /* Status semantic tokens */
   --status-success: oklch(0.527 0.154 150.069);
   --status-success-foreground: oklch(0.393 0.124 148.697);
@@ -111,10 +111,10 @@
   --status-error-foreground: oklch(0.577 0.245 27.325);
   --status-error-muted: oklch(0.577 0.245 27.325 / 10%);
   --status-error-border: oklch(0.577 0.245 27.325 / 20%);
-  --status-info: oklch(0.546 0.245 262.881);
-  --status-info-foreground: oklch(0.546 0.245 262.881);
-  --status-info-muted: oklch(0.546 0.245 262.881 / 10%);
-  --status-info-border: oklch(0.546 0.245 262.881 / 20%);
+  --status-info: #6632FF;
+  --status-info-foreground: #6632FF;
+  --status-info-muted: rgb(102 50 255 / 10%);
+  --status-info-border: rgb(102 50 255 / 20%);
   /* Terminal / code-block (bash) tokens */
   --terminal-bg: oklch(0.13 0.004 49.25);
   --terminal-foreground: oklch(0.87 0.006 106);
@@ -132,7 +132,7 @@
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.623 0.214 259.815);
+  --primary: #6632FF;
   --primary-foreground: oklch(0.985 0.001 106.423);
   --secondary: oklch(0.268 0.007 34.298);
   --secondary-foreground: oklch(0.985 0.001 106.423);
@@ -143,22 +143,22 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.623 0.214 259.815);
-  --chart-1: oklch(0.623 0.214 259.815);
+  --ring: #6632FF;
+  --chart-1: #6632FF;
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.216 0.006 56.043);
   --sidebar-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-primary: oklch(0.623 0.214 259.815);
+  --sidebar-primary: #6632FF;
   --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
   --sidebar-accent: oklch(0.268 0.007 34.298);
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
-  --user-bubble: oklch(0.90 0.003 106);
-  --user-bubble-foreground: oklch(0.147 0.004 49.25);
+  --sidebar-ring: #6632FF;
+  --user-bubble: #E0DFFF;
+  --user-bubble-foreground: #2A2D32;
   /* Status semantic tokens */
   --status-success: oklch(0.527 0.154 150.069);
   --status-success-foreground: oklch(0.448 0.133 148.697);
@@ -172,10 +172,10 @@
   --status-error-foreground: oklch(0.704 0.191 22.216);
   --status-error-muted: oklch(0.704 0.191 22.216 / 10%);
   --status-error-border: oklch(0.704 0.191 22.216 / 20%);
-  --status-info: oklch(0.623 0.214 259.815);
-  --status-info-foreground: oklch(0.623 0.214 259.815);
-  --status-info-muted: oklch(0.623 0.214 259.815 / 10%);
-  --status-info-border: oklch(0.623 0.214 259.815 / 20%);
+  --status-info: #6632FF;
+  --status-info-foreground: #6632FF;
+  --status-info-muted: rgb(102 50 255 / 10%);
+  --status-info-border: rgb(102 50 255 / 20%);
   /* Terminal tokens — dark mode: stronger border contrast against dark page bg */
   --terminal-bg: oklch(0.10 0.002 49);
   --terminal-foreground: oklch(0.87 0.006 106);
@@ -224,6 +224,25 @@
     background: color-mix(in oklch, var(--muted-foreground) 50%, transparent);
   }
 
+  .app-shell-right-surface,
+  .flex.h-screen.overflow-hidden > .flex.min-w-0.flex-1.flex-col.overflow-hidden {
+    background: linear-gradient(136deg, #FEFEFE 0%, #F8F8FB 48.24%, #F0F3FF 100%);
+  }
+
+  .app-shell-main-surface,
+  .flex.h-screen.overflow-hidden main.relative.flex-1.overflow-hidden {
+    background: linear-gradient(136deg, #FEFEFE 0%, #F8F8FB 48.24%, #F0F3FF 100%);
+  }
+
+  .chat-composer-surface [data-slot="input-group"],
+  .flex.h-screen.overflow-hidden main form > [data-slot="input-group"] {
+    border-color: rgb(212 205 255 / 55%);
+    border-radius: 24px;
+    background: rgb(255 255 255 / 62%);
+    box-shadow: 0 10px 30px rgb(102 50 255 / 6%), inset 0 1px 0 rgb(255 255 255 / 75%);
+    backdrop-filter: blur(18px);
+  }
+
   /* Prose (markdown) refinements */
   .prose {
     --tw-prose-headings: var(--foreground);
@@ -267,6 +286,15 @@
   .prose table th {
     font-weight: 600;
   }
+}
+
+.chat-composer-surface [data-slot="input-group"],
+.flex.h-screen.overflow-hidden main form > [data-slot="input-group"] {
+  border-color: rgb(212 205 255 / 55%) !important;
+  border-radius: 24px !important;
+  background: rgb(255 255 255 / 62%) !important;
+  box-shadow: 0 10px 30px rgb(102 50 255 / 6%), inset 0 1px 0 rgb(255 255 255 / 75%) !important;
+  backdrop-filter: blur(18px);
 }
 
 /* Search result highlight flash animation for messages */
@@ -374,4 +402,19 @@
   .cm-editor * {
     all: revert-layer;
   }
+}
+
+:root,
+.dark {
+  --primary: #6632FF;
+  --ring: #6632FF;
+  --chart-1: #6632FF;
+  --sidebar-primary: #6632FF;
+  --sidebar-ring: #6632FF;
+  --user-bubble: #E0DFFF;
+  --user-bubble-foreground: #2A2D32;
+  --status-info: #6632FF;
+  --status-info-foreground: #6632FF;
+  --status-info-muted: rgb(102 50 255 / 10%);
+  --status-info-border: rgb(102 50 255 / 20%);
 }

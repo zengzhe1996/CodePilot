@@ -76,10 +76,10 @@ export function SessionListItem({
           "flex items-center gap-1.5 rounded-md pl-2 pr-2 py-1.5 transition-all duration-150 min-w-0",
           isWorkspace
             ? isActive
-              ? "bg-primary/[0.12] text-sidebar-accent-foreground"
+              ? "bg-white text-sidebar-accent-foreground"
               : "text-sidebar-foreground hover:bg-primary/[0.06]"
             : isActive
-              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              ? "bg-white text-sidebar-accent-foreground"
               : "text-sidebar-foreground hover:bg-accent/50"
         )}
       >
@@ -229,7 +229,7 @@ export function SplitGroupSection({
               className={cn(
                 "group relative flex items-center gap-1.5 rounded-md pl-7 pr-2 py-1.5 transition-all duration-150 min-w-0 cursor-pointer",
                 isActiveInSplit
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  ? "bg-white text-sidebar-accent-foreground"
                   : "text-sidebar-foreground hover:bg-accent/50"
               )}
               onClick={(e) => {

@@ -124,8 +124,9 @@ export default function ChatSessionPage({ params }: ChatSessionPageProps) {
   }, [targetFilePath, setFileTreeOpen]);
 
   // Auto-open default panel the first time a session is ever opened.
-  // Uses sessionStorage to track which sessions have already been initialized,
-  // so re-opening an untouched (zero-message) session won't override the layout.
+  // Hidden per product request: creating a new chat should not pop open the
+  // right-side file panel automatically. Keep the original default-panel flow
+  // commented so it can be restored later.
   useEffect(() => {
     if (defaultPanelAppliedRef.current) return;
     defaultPanelAppliedRef.current = true;
@@ -137,30 +138,36 @@ export default function ChatSessionPage({ params }: ChatSessionPageProps) {
       sessionStorage.setItem(storageKey, '1');
     }
 
-    (async () => {
-      try {
-        if (targetFilePath) {
-          // Preserve explicit deep-link intent from global search.
-          setFileTreeOpen(true);
-          return;
-        }
-        const res = await fetch('/api/settings/app');
-        if (!res.ok) return;
-        const data = await res.json();
-        const panel = data.settings?.default_panel || 'file_tree';
-        if (panel === 'none') {
-          setFileTreeOpen(false);
-          setGitPanelOpen(false);
-          setDashboardPanelOpen(false);
-        } else {
-          setFileTreeOpen(panel === 'file_tree');
-          setGitPanelOpen(panel === 'git');
-          setDashboardPanelOpen(panel === 'dashboard');
-        }
-      } catch {
-        setFileTreeOpen(true);
-      }
-    })();
+    if (targetFilePath) return;
+
+    setFileTreeOpen(false);
+    setGitPanelOpen(false);
+    setDashboardPanelOpen(false);
+
+    // (async () => {
+    //   try {
+    //     if (targetFilePath) {
+    //       // Preserve explicit deep-link intent from global search.
+    //       setFileTreeOpen(true);
+    //       return;
+    //     }
+    //     const res = await fetch('/api/settings/app');
+    //     if (!res.ok) return;
+    //     const data = await res.json();
+    //     const panel = data.settings?.default_panel || 'file_tree';
+    //     if (panel === 'none') {
+    //       setFileTreeOpen(false);
+    //       setGitPanelOpen(false);
+    //       setDashboardPanelOpen(false);
+    //     } else {
+    //       setFileTreeOpen(panel === 'file_tree');
+    //       setGitPanelOpen(panel === 'git');
+    //       setDashboardPanelOpen(panel === 'dashboard');
+    //     }
+    //   } catch {
+    //     setFileTreeOpen(true);
+    //   }
+    // })();
   }, [id, targetFilePath, setFileTreeOpen, setGitPanelOpen, setDashboardPanelOpen]);
 
   if (loading || !sessionInfoLoaded) {

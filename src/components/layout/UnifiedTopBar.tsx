@@ -19,9 +19,9 @@ import {
 } from "@/components/ui/tooltip";
 import { usePanel } from "@/hooks/usePanel";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useClientPlatform } from '@/hooks/useClientPlatform';
-import { showToast } from '@/hooks/useToast';
-import { SPECIES_IMAGE_URL, EGG_IMAGE_URL, type Species } from '@/lib/buddy';
+import { useClientPlatform } from "@/hooks/useClientPlatform";
+import { showToast } from "@/hooks/useToast";
+import { SPECIES_IMAGE_URL, EGG_IMAGE_URL, type Species } from "@/lib/buddy";
 
 export function UnifiedTopBar() {
   const {
@@ -43,18 +43,26 @@ export function UnifiedTopBar() {
   } = usePanel();
   const { t } = useTranslation();
   const { isWindows } = useClientPlatform();
-  const [assistantName, setAssistantName] = useState('');
-  const [buddyEmoji, setBuddyEmoji] = useState('');
-  const [buddySpecies, setBuddySpecies] = useState('');
+  const [assistantName, setAssistantName] = useState("");
+  const [buddyEmoji, setBuddyEmoji] = useState("");
+  const [buddySpecies, setBuddySpecies] = useState("");
 
   useEffect(() => {
     if (!isAssistantWorkspace) return;
     let cancelled = false;
-    fetch('/api/workspace/summary')
-      .then(r => r.ok ? r.json() : null)
-      .then(data => { if (!cancelled) { setAssistantName(data?.name || ''); setBuddyEmoji(data?.buddy?.emoji || ''); setBuddySpecies(data?.buddy?.species || ''); } })
+    fetch("/api/workspace/summary")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled) {
+          setAssistantName(data?.name || "");
+          setBuddyEmoji(data?.buddy?.emoji || "");
+          setBuddySpecies(data?.buddy?.species || "");
+        }
+      })
       .catch(() => {});
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [isAssistantWorkspace]);
   const pathname = usePathname();
 
@@ -64,11 +72,11 @@ export function UnifiedTopBar() {
 
   // --- Title editing ---
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [editTitle, setEditTitle] = useState('');
+  const [editTitle, setEditTitle] = useState("");
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   const handleStartEditTitle = useCallback(() => {
-    setEditTitle(sessionTitle || t('chat.newConversation'));
+    setEditTitle(sessionTitle || t("chat.newConversation"));
     setIsEditingTitle(true);
   }, [sessionTitle, t]);
 
@@ -80,27 +88,34 @@ export function UnifiedTopBar() {
     }
     try {
       const res = await fetch(`/api/chat/sessions/${sessionId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: trimmed }),
       });
       if (res.ok) {
         setSessionTitle(trimmed);
-        window.dispatchEvent(new CustomEvent('session-updated', { detail: { id: sessionId, title: trimmed } }));
+        window.dispatchEvent(
+          new CustomEvent("session-updated", {
+            detail: { id: sessionId, title: trimmed },
+          }),
+        );
       }
     } catch {
-      showToast({ type: 'error', message: t('error.titleSaveFailed') });
+      showToast({ type: "error", message: t("error.titleSaveFailed") });
     }
     setIsEditingTitle(false);
   }, [editTitle, sessionId, setSessionTitle, t]);
 
-  const handleTitleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSaveTitle();
-    } else if (e.key === 'Escape') {
-      setIsEditingTitle(false);
-    }
-  }, [handleSaveTitle]);
+  const handleTitleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleSaveTitle();
+      } else if (e.key === "Escape") {
+        setIsEditingTitle(false);
+      }
+    },
+    [handleSaveTitle],
+  );
 
   useEffect(() => {
     if (isEditingTitle && titleInputRef.current) {
@@ -110,7 +125,9 @@ export function UnifiedTopBar() {
   }, [isEditingTitle]);
 
   // Extract project name from working directory
-  const projectName = workingDirectory ? workingDirectory.split(/[\\/]/).filter(Boolean).pop() || '' : '';
+  const projectName = workingDirectory
+    ? workingDirectory.split(/[\\/]/).filter(Boolean).pop() || ""
+    : "";
 
   // On non-chat routes, render only a thin drag region (no visible bar)
   if (!isChatRoute) {
@@ -118,7 +135,7 @@ export function UnifiedTopBar() {
     return (
       <div
         className="h-3 shrink-0"
-        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
+        style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
       />
     );
   }
@@ -127,16 +144,19 @@ export function UnifiedTopBar() {
     <>
       <div
         className="flex h-12 shrink-0 items-center gap-2 bg-background px-3"
-        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
+        style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
       >
         {/* Left: chat title + project folder */}
-        <div
+        {/* <div
           className="flex items-center gap-1.5 min-w-0 shrink"
-          style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+          style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
         >
-          {isChatRoute && sessionTitle && (
-            isEditingTitle ? (
-              <div style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+          {isChatRoute &&
+            sessionTitle &&
+            (isEditingTitle ? (
+              <div
+                style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
+              >
                 <Input
                   ref={titleInputRef}
                   value={editTitle}
@@ -160,8 +180,7 @@ export function UnifiedTopBar() {
                   <PencilSimple size={12} className="text-muted-foreground" />
                 </Button>
               </div>
-            )
-          )}
+            ))}
 
           {isChatRoute && projectName && sessionTitle && (
             <span className="text-xs text-muted-foreground/60 shrink-0">/</span>
@@ -179,9 +198,9 @@ export function UnifiedTopBar() {
                       if (window.electronAPI?.shell?.openPath) {
                         window.electronAPI.shell.openPath(workingDirectory);
                       } else {
-                        fetch('/api/files/open', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
+                        fetch("/api/files/open", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({ path: workingDirectory }),
                         }).catch(() => {});
                       }
@@ -196,15 +215,15 @@ export function UnifiedTopBar() {
               </TooltipContent>
             </Tooltip>
           )}
-        </div>
+        </div> */}
 
         {/* Spacer */}
         <div className="flex-1" />
 
         {/* Right: action buttons */}
-        <div
+        {/* <div
           className="flex items-center gap-1"
-          style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+          style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
         >
           {isChatRoute && (
             <>
@@ -218,7 +237,9 @@ export function UnifiedTopBar() {
                   >
                     <GitBranch size={16} />
                     {currentBranch && (
-                      <span className="text-xs max-w-[100px] truncate">{currentBranch}</span>
+                      <span className="text-xs max-w-[100px] truncate">
+                        {currentBranch}
+                      </span>
                     )}
                     {gitDirtyCount > 0 && (
                       <span className="flex items-center gap-0.5 text-[11px] text-amber-500">
@@ -226,10 +247,10 @@ export function UnifiedTopBar() {
                         {gitDirtyCount}
                       </span>
                     )}
-                    <span className="sr-only">{t('topBar.git')}</span>
+                    <span className="sr-only">{t("topBar.git")}</span>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom">{t('topBar.git')}</TooltipContent>
+                <TooltipContent side="bottom">{t("topBar.git")}</TooltipContent>
               </Tooltip>
 
               <Tooltip>
@@ -237,14 +258,20 @@ export function UnifiedTopBar() {
                   <Button
                     variant={fileTreeOpen ? "secondary" : "ghost"}
                     size="icon-sm"
-                    className={fileTreeOpen ? "" : "text-muted-foreground hover:text-foreground"}
+                    className={
+                      fileTreeOpen
+                        ? ""
+                        : "text-muted-foreground hover:text-foreground"
+                    }
                     onClick={() => setFileTreeOpen(!fileTreeOpen)}
                   >
                     <TreeStructure size={16} />
-                    <span className="sr-only">{t('topBar.fileTree')}</span>
+                    <span className="sr-only">{t("topBar.fileTree")}</span>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom">{t('topBar.fileTree')}</TooltipContent>
+                <TooltipContent side="bottom">
+                  {t("topBar.fileTree")}
+                </TooltipContent>
               </Tooltip>
 
               <Tooltip>
@@ -252,26 +279,39 @@ export function UnifiedTopBar() {
                   <Button
                     variant={dashboardPanelOpen ? "secondary" : "ghost"}
                     size="icon-sm"
-                    className={dashboardPanelOpen ? "" : "text-muted-foreground hover:text-foreground"}
+                    className={
+                      dashboardPanelOpen
+                        ? ""
+                        : "text-muted-foreground hover:text-foreground"
+                    }
                     onClick={() => setDashboardPanelOpen(!dashboardPanelOpen)}
                   >
-                    {isAssistantWorkspace
-                      ? <img
-                          src={buddySpecies ? (SPECIES_IMAGE_URL[buddySpecies as Species] || '') : EGG_IMAGE_URL}
-                          alt="" width={16} height={16} className="rounded-sm"
-                        />
-                      : <ChartBar size={16} />}
-                    <span className="sr-only">{t('topBar.dashboard')}</span>
+                    {isAssistantWorkspace ? (
+                      <img
+                        src={
+                          buddySpecies
+                            ? SPECIES_IMAGE_URL[buddySpecies as Species] || ""
+                            : EGG_IMAGE_URL
+                        }
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="rounded-sm"
+                      />
+                    ) : (
+                      <ChartBar size={16} />
+                    )}
+                    <span className="sr-only">{t("topBar.dashboard")}</span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
-                  {isAssistantWorkspace ? 'Assistant' : t('topBar.dashboard')}
+                  {isAssistantWorkspace ? "Assistant" : t("topBar.dashboard")}
                 </TooltipContent>
               </Tooltip>
             </>
           )}
           {isWindows && <div style={{ width: 138 }} className="shrink-0" />}
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { usePanel } from "@/hooks/usePanel";
 
-import { Plus, MagnifyingGlass, Lightning, SpinnerGap } from "@/components/ui/icon";
+import { MagnifyingGlass, Lightning, SpinnerGap } from "@/components/ui/icon";
 import { SkillListItem } from "./SkillListItem";
 import { SkillEditor } from "./SkillEditor";
-import { CreateSkillDialog } from "./CreateSkillDialog";
+// import { CreateSkillDialog } from "./CreateSkillDialog";
 import { MarketplaceBrowser } from "./MarketplaceBrowser";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { TranslationKey } from "@/i18n";
@@ -24,7 +24,7 @@ export function SkillsManager() {
   const [selected, setSelected] = useState<SkillItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [showCreate, setShowCreate] = useState(false);
+  // const [showCreate, setShowCreate] = useState(false);
   const [viewTab, setViewTab] = useState<ViewTab>("local");
 
   const fetchSkills = useCallback(async () => {
@@ -46,23 +46,23 @@ export function SkillsManager() {
     fetchSkills();
   }, [fetchSkills]);
 
-  const handleCreate = useCallback(
-    async (name: string, scope: "global" | "project", content: string) => {
-      const res = await fetch("/api/skills", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, content, scope, cwd: workingDirectory || undefined }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to create skill");
-      }
-      const data = await res.json();
-      setSkills((prev) => [...prev, data.skill]);
-      setSelected(data.skill);
-    },
-    [workingDirectory]
-  );
+  // const handleCreate = useCallback(
+  //   async (name: string, scope: "global" | "project", content: string) => {
+  //     const res = await fetch("/api/skills", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ name, content, scope, cwd: workingDirectory || undefined }),
+  //     });
+  //     if (!res.ok) {
+  //       const data = await res.json();
+  //       throw new Error(data.error || "Failed to create skill");
+  //     }
+  //     const data = await res.json();
+  //     setSkills((prev) => [...prev, data.skill]);
+  //     setSelected(data.skill);
+  //   },
+  //   [workingDirectory]
+  // );
 
   const buildSkillUrl = useCallback((skill: SkillItem) => {
     const params = new URLSearchParams();
@@ -160,12 +160,13 @@ export function SkillsManager() {
             <h1 className="text-xl font-semibold">{t('extensions.skills')}</h1>
             <p className="text-sm text-muted-foreground mt-1">{t('skills.description' as TranslationKey)}</p>
           </div>
-          {viewTab === "local" && (
+          {/* New skill entry hidden per product request. */}
+          {/* {viewTab === "local" && (
             <Button size="sm" onClick={() => setShowCreate(true)} className="gap-1">
               <Plus size={14} />
               {t('skills.newSkill')}
             </Button>
-          )}
+          )} */}
         </div>
         {/* Segmented control */}
         <div className="flex items-center bg-muted rounded-md p-0.5 mt-3 w-fit">
@@ -284,7 +285,8 @@ export function SkillsManager() {
                   <p className="text-xs">
                     {search ? t('skills.noSkillsFound') : t('skills.noSkillsFound')}
                   </p>
-                  {!search && (
+                  {/* New skill empty-state entry hidden per product request. */}
+                  {/* {!search && (
                     <Button
                       variant="outline"
                       size="xs"
@@ -294,7 +296,7 @@ export function SkillsManager() {
                       <Plus size={12} />
                       Create one
                     </Button>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>
@@ -322,7 +324,8 @@ export function SkillsManager() {
                   {t('skills.selectOrCreate')}
                 </p>
               </div>
-              <Button
+              {/* New skill entry hidden per product request. */}
+              {/* <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setShowCreate(true)}
@@ -330,18 +333,19 @@ export function SkillsManager() {
               >
                 <Plus size={14} />
                 {t('skills.newSkill')}
-              </Button>
+              </Button> */}
             </div>
           )}
         </div>
       </div>
       )}
 
-      <CreateSkillDialog
+      {/* New skill dialog hidden per product request. */}
+      {/* <CreateSkillDialog
         open={showCreate}
         onOpenChange={setShowCreate}
         onCreate={handleCreate}
-      />
+      /> */}
     </div>
   );
 }
