@@ -10,7 +10,7 @@ import { CliToolDetailDialog } from "./CliToolDetailDialog";
 import { CliToolExtraDetailDialog } from "./CliToolExtraDetailDialog";
 // CliToolInstallDialog removed — install now goes through chat AI
 import { CliToolBatchDescribeDialog } from "./CliToolBatchDescribeDialog";
-import { SpinnerGap, Sparkle, ArrowSquareOut, Warning, Plus, Trash, Star } from "@/components/ui/icon";
+import { SpinnerGap, Sparkle, ArrowSquareOut, Warning, Trash, Star } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { EXTRA_WELL_KNOWN_BINS } from "@/lib/cli-tools-catalog";
 
@@ -143,13 +143,15 @@ export function CliToolsManager() {
     window.location.href = `/chat?prefill=${encodeURIComponent(lines.join('\n'))}`;
   };
 
-  const handleAddTool = () => {
-    const prefill = locale === 'zh'
-      ? '我想安装一个新的 CLI 工具并添加到工具库。\n工具名称：\n安装命令（如 brew install xxx）：'
-      : 'I want to install a new CLI tool and add it to my tool library.\nTool name: \nInstall command (e.g. brew install xxx): ';
-    // Use hard navigation to ensure the new page reads the prefill param fresh
-    window.location.href = `/chat?prefill=${encodeURIComponent(prefill)}`;
-  };
+  // Add tool entry hidden per product request. Keep the flow commented so it
+  // can be restored without changing the rest of the CLI tools manager.
+  // const handleAddTool = () => {
+  //   const prefill = locale === 'zh'
+  //     ? '我想安装一个新的 CLI 工具并添加到工具库。\n工具名称：\n安装命令（如 brew install xxx）：'
+  //     : 'I want to install a new CLI tool and add it to my tool library.\nTool name: \nInstall command (e.g. brew install xxx): ';
+  //   // Use hard navigation to ensure the new page reads the prefill param fresh
+  //   window.location.href = `/chat?prefill=${encodeURIComponent(prefill)}`;
+  // };
 
   const handleDeleteCustomTool = async (id: string) => {
     try {
@@ -183,14 +185,15 @@ export function CliToolsManager() {
             <h1 className="text-xl font-semibold">{t('cliTools.title')}</h1>
             <p className="text-sm text-muted-foreground mt-1">{t('cliTools.description')}</p>
           </div>
-          <Button
+          {/* Add tool button hidden per product request. */}
+          {/* <Button
             size="sm"
             className="gap-1.5 shrink-0"
             onClick={handleAddTool}
           >
             <Plus size={14} />
             {t('cliTools.addTool' as TranslationKey)}
-          </Button>
+          </Button> */}
         </div>
       </div>
 

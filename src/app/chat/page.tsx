@@ -190,7 +190,7 @@ export default function NewChatPage() {
     });
 
     return () => { cancelled = true; };
-   
+
   }, []); // Run once on mount to validate initial values
 
   // Initialize workingDir from localStorage (or setup default), validating the path exists

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface ChatComposerActionBarProps {
   left?: ReactNode;
@@ -8,16 +8,23 @@ interface ChatComposerActionBarProps {
   right?: ReactNode;
 }
 
-export function ChatComposerActionBar({ left, center, right }: ChatComposerActionBarProps) {
+export function ChatComposerActionBar(
+  {
+    // left,
+    // center,
+    // right,
+  }: ChatComposerActionBarProps,
+) {
   return (
-    <div className="flex items-center justify-between gap-2 px-4 pt-0.5 pb-2.5">
-      <div className="flex items-center gap-2">
+    <div className="flex items-center justify-center gap-2 px-4 pt-0.5 pb-2.5">
+      <div className="text-[14px] text-[#C5C5D8]">内容由AI生成，仅供参考</div>
+      {/* <div className="flex items-center gap-2">
         {left}
         {center}
       </div>
       <div className="flex items-center gap-2">
         {right}
-      </div>
+      </div> */}
     </div>
   );
 }

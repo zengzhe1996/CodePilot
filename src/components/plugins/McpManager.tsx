@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Plus, List, Code, SpinnerGap, ArrowsClockwise, WifiHigh } from "@/components/ui/icon";
+import { List, Code, SpinnerGap, ArrowsClockwise, WifiHigh } from "@/components/ui/icon";
 import { McpServerList } from "@/components/plugins/McpServerList";
 import { McpServerEditor } from "@/components/plugins/McpServerEditor";
 import { ConfigEditor } from "@/components/plugins/ConfigEditor";
@@ -89,11 +89,13 @@ export function McpManager() {
     setEditorOpen(true);
   }
 
-  function handleAdd() {
-    setEditingName(undefined);
-    setEditingServer(undefined);
-    setEditorOpen(true);
-  }
+  // Add server entry hidden per product request. Keep the flow commented so it
+  // can be restored without touching the editor implementation.
+  // function handleAdd() {
+  //   setEditingName(undefined);
+  //   setEditingServer(undefined);
+  //   setEditorOpen(true);
+  // }
 
   const handlePersistentToggle = useCallback(async (name: string, enabled: boolean) => {
     const updated = { ...servers };
@@ -233,10 +235,11 @@ export function McpManager() {
               {t('mcp.managerDesc' as TranslationKey)}
             </p>
           </div>
-          <Button size="sm" className="gap-1" onClick={handleAdd}>
+          {/* Add server button hidden per product request. */}
+          {/* <Button size="sm" className="gap-1" onClick={handleAdd}>
             <Plus size={14} />
             {t('mcp.addServer')}
-          </Button>
+          </Button> */}
         </div>
       </div>
 

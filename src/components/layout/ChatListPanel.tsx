@@ -5,15 +5,13 @@ import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  MagnifyingGlass,
+  // MagnifyingGlass,
   FileArrowDown,
   Plus,
-  FolderPlus,
+  // FolderPlus,
   Lightning,
   Plug,
   Terminal,
-  Image,
-  WifiHigh,
   Gear,
 } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
@@ -32,7 +30,7 @@ import { showToast } from '@/hooks/useToast';
 // ConnectionStatus removed from header — CLI status now lives in Settings > Claude CLI
 // ImportSessionDialog moved to Settings page
 import { SessionListItem, SplitGroupSection } from "./SessionListItem";
-import { ProjectGroupHeader } from "./ProjectGroupHeader";
+// import { ProjectGroupHeader } from "./ProjectGroupHeader";
 import { FolderPicker } from "@/components/chat/FolderPicker";
 import { useAssistantWorkspace } from "@/hooks/useAssistantWorkspace";
 import { AssistantPromoCard } from "@/components/chat/ChatEmptyState";
@@ -425,13 +423,11 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
     { href: "/skills", label: t('nav.skills' as TranslationKey), icon: Lightning },
     { href: "/mcp", label: t('nav.mcp' as TranslationKey), icon: Plug },
     { href: "/cli-tools", label: t('nav.cliTools' as TranslationKey), icon: Terminal },
-    { href: "/gallery", label: t('nav.gallery' as TranslationKey), icon: Image },
-    { href: "/bridge", label: t('nav.bridge' as TranslationKey), icon: WifiHigh },
   ];
 
   return (
     <aside
-      className="hidden h-full shrink-0 flex-col overflow-hidden bg-sidebar/80 backdrop-blur-xl lg:flex"
+      className="hidden h-full shrink-0 flex-col overflow-hidden bg-[linear-gradient(180deg,#FCFCFF_0%,#F3F3FA_100%)] lg:flex"
       style={{ width: width ?? 240 }}
     >
       {/* macOS traffic lights spacing */}
@@ -442,13 +438,14 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
         <Button
           variant="outline"
           size="sm"
-          className="flex-1 justify-center gap-1.5 h-8 text-xs"
+          className="flex-1 justify-center gap-1.5 h-8 rounded-[25px] border border-[#D4CDFF] bg-[#F0EEFF] text-xs text-[#6632FF] shadow-none hover:bg-[#F0EEFF] hover:text-[#6632FF]"
           disabled={creatingChat}
           onClick={handleNewChat}
         >
           <Plus size={14} />
           {t('chatList.newConversation')}
         </Button>
+        {/*
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -463,6 +460,7 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
           </TooltipTrigger>
           <TooltipContent side="bottom">{t('chatList.searchSessions')}</TooltipContent>
         </Tooltip>
+        */}
       </div>
 
       {/* Feature nav items */}
@@ -477,7 +475,7 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
                   size="sm"
                   className={`w-full justify-start gap-2 h-8 text-xs ${
                     isActive
-                      ? "bg-accent text-accent-foreground font-medium"
+                      ? "bg-white text-accent-foreground font-medium"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -498,6 +496,7 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
         <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60">
           {t('chatList.threads')}
         </span>
+        {/*
         <Button
           variant="ghost"
           size="sm"
@@ -507,6 +506,7 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
           <FolderPlus size={12} />
           {t('chatList.addProjectFolder')}
         </Button>
+        */}
       </div>
 
       {/* Session list grouped by project */}
@@ -566,6 +566,7 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
               return (
                 <div key={group.workingDirectory || "__no_project"} className="mt-1 first:mt-0">
                   {/* Folder header */}
+                  {/*
                   <ProjectGroupHeader
                     workingDirectory={group.workingDirectory}
                     displayName={group.displayName}
@@ -584,10 +585,11 @@ export function ChatListPanel({ open, width, hasUpdate, readyToInstall }: ChatLi
                     buddyName={assistantSummary?.buddy?.buddyName}
                     buddySpecies={assistantSummary?.buddy?.species}
                   />
+                  */}
 
                   {/* Session items with animated collapse */}
                   <AnimatePresence initial={false}>
-                    {!isCollapsed && (
+                    {true && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
